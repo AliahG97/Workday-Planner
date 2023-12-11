@@ -1,17 +1,51 @@
-Wrap all code that interacts with the DOM in a call to jQuery to ensure that
- the code isn't run until the browser has finished rendering all the elements
- in the html.
+$(document).ready(function () {
+  function executeHourlyAction(hour) {
+    console.log(`Action for ${hour} hour.`);
+  }
 
-$(function () {
-   TODO: Add a listener for click events on the save button. 
-   
-   This code should use the id in the containing time-block as a key to save the user input in local storage.
+  function performHoutrlyActions() {
+    var currentHour = new Date().getHours();
+    executehourlyAction(currentHour);
+    setTimeout(performHourlyAction, 60 * 60 * 1000);
+  }
+
+  function applyHourlyClasses() {
+  var currentHour = new Date().getHours();
+    $('.time-block').each(function() {
+      var blockHour = parseInt(this.id.split('-')[1]);
+      if (blockHour < currentHour) {
+        $(this).removeClass('future present').addClass('past');
+      } else if (blockHour === currentHour) {
+        $(this).removeClass('past future').addClass('present');
+      } else {
+        $(this).removeClass('past present').addClass('future');
+      }     
+    });
+  }
   
-   TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour. 
-     
-   TODO: Add code to get any user input that was saved in localStorage and setthe values of the corresponding textarea elements. HINT: How can the id attribute of each time-block be used to do this?
+    function loadDataFromStorage() {
+      $('.time-block').each(function() {
+        var blockID =this.id;
+        var savedText = localStorage.getItem(blockID);
+        if (savedText !== null) {
+          $(this).find('.description').val(savedText);
+        }
+      });
+    }
+
+    $('.saveBtn').on('click', function() {
+      var text = $(this).siblings('.description').val();
+      var BlockID = $(this).parent().attr('id');
+      if (text.trim() !== '') {
+        localStorage.setItem(blockID, text);
+      }
+    });
+
+    $('#currentDay'),text(dayjs().format('dddd, MMMM D'));
+
+    applyHourlyClasses();
+    loadDataFromStorage();
+    performHoutrlyActions();
+  });
   
-   TODO: Add code to display the current date in the header of the page.
-});
-
-
+        
