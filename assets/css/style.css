@@ -57,3 +57,12 @@ textarea {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
+#hour-18, #hour-19, #hour-20, #hour-21,
+#hour-22, #hour-23, #hour-00, #hour-1,
+#hour-2, #hour-3, #hour-4, #hour-5,
+#hour-6, #hour-7, #hour-8 {
+  display:none;
+}
+h1.display-3{
+  color:deepPink;
+}
