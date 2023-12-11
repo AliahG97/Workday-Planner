@@ -3,14 +3,14 @@ $(document).ready(function () {
     console.log(`Action for ${hour} hour.`);
   }
 
-  function performHoutrlyActions() {
+  function performHourlyActions() {
     var currentHour = new Date().getHours();
-    executehourlyAction(currentHour);
-    setTimeout(performHourlyAction, 60 * 60 * 1000);
+    executeHourlyAction(currentHour);
+    setTimeout(performHourlyActions, 60 * 60 * 1000);
   }
 
   function applyHourlyClasses() {
-  var currentHour = new Date().getHours();
+    var currentHour = new Date().getHours();
     $('.time-block').each(function() {
       var blockHour = parseInt(this.id.split('-')[1]);
       if (blockHour < currentHour) {
@@ -20,28 +20,28 @@ $(document).ready(function () {
       } else {
         $(this).removeClass('past present').addClass('future');
       }     
-    });
-  }
-  
-    function loadDataFromStorage() {
-      $('.time-block').each(function() {
-        var blockID =this.id;
-        var savedText = localStorage.getItem(blockID);
-        if (savedText !== null) {
-          $(this).find('.description').val(savedText);
-        }
-      });
-    }
+  });
+}
 
-    $('.saveBtn').on('click', function() {
-      var text = $(this).siblings('.description').val();
-      var BlockID = $(this).parent().attr('id');
-      if (text.trim() !== '') {
-        localStorage.setItem(blockID, text);
+  function loadDataFromStorage() {
+    $('.time-block').each(function() {
+      var blockID =this.id;
+      var savedText = localStorage.getItem(blockID);
+      if (savedText !== null) {
+        $(this).find('.description').val(savedText);
       }
     });
+  }
 
-    $('#currentDay'),text(dayjs().format('dddd, MMMM D'));
+    $('.saveBtn').on('click', function() {
+        var text = $(this).siblings('.description').val();
+        var BlockID = $(this).parent().attr('id');
+        if (text.trim() !== '') {
+            localStorage.setItem(blockID, text);
+        }
+    });
+
+    $('#currentDay').text(dayjs().format('dddd, MMMM D'));
 
     applyHourlyClasses();
     loadDataFromStorage();
