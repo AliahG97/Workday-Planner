@@ -13,7 +13,7 @@ This calendar application allows a user to save events for each hour of a workin
 
 
 ## Screenshots
-![Timer Screenshot](./assets/images/Workday-Planner_Screenshot.gif) (https://aliahg97.github.io/Workday-Planner/)
+![Timer Screenshot](./assets/Images/Workday-Planner_Screenshot.gif) (https://aliahg97.github.io/Workday-Planner/)
 
 ## Usage 
 For employees with busy schedules who want to add important events to their daily planner, this will help them manage their time effectively.
